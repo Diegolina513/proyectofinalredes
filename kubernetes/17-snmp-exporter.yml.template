@@ -1,0 +1,15 @@
+auths:
+  redes2:
+    version: 2
+    community: __SNMP_COMMUNITY__
+modules:
+  system:
+    get:
+      - 1.3.6.1.2.1.1.3.0
+    timeout: 3s
+    retries: 1
+    metrics:
+      - name: sysUpTime
+        oid: 1.3.6.1.2.1.1.3
+        type: gauge
+        help: Tiempo activo del agente SNMP, en centesimas de segundo.

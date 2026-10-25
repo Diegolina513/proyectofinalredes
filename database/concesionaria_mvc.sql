@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS concesionaria_mvc CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE concesionaria_mvc;
+
+CREATE TABLE IF NOT EXISTS marcas (
+    id_marca INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    pais_origen VARCHAR(100) NOT NULL DEFAULT ''
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS categorias (
+    id_categoria INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    descripcion VARCHAR(500) NOT NULL DEFAULT ''
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS autos (
+    id_auto INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(20) NOT NULL UNIQUE,
+    linea VARCHAR(100) NOT NULL,
+    modelo SMALLINT UNSIGNED NOT NULL,
+    color VARCHAR(50) NOT NULL,
+    precio DECIMAL(12,2) UNSIGNED NOT NULL,
+    estado ENUM('Disponible', 'Vendido') NOT NULL,
+    id_marca INT UNSIGNED NOT NULL,
+    id_categoria INT UNSIGNED NOT NULL,
+    FOREIGN KEY (id_marca) REFERENCES marcas(id_marca) ON DELETE RESTRICT,
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria) ON DELETE RESTRICT
+) ENGINE=InnoDB;

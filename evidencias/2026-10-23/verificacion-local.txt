@@ -1,0 +1,14 @@
+Validación local — 23 de octubre de 2026, Guatemala
+Ubicación: /home/diego/Redes 2 proyecto/crud-autos
+Imagen construida: crud-autos:v1.0.0
+URL: http://localhost:8080
+App y db: healthy.
+GET /health/live.php: HTTP 200, alive.
+GET /health/ready.php: HTTP 200, ready.
+CRUD por HTTP: crear marca, categoría y auto; consultar detalle; editar color;
+crear y eliminar un segundo auto temporal. Comprobaciones satisfactorias.
+Auto conservado: TEST-D5B4F57A, color Verde.
+Persistencia: contenedor db recreado con --force-recreate --no-deps;
+identificador distinto; mismo auto y edición verificados por HTTP después.
+No se eliminó el volumen. Véase persistencia.txt.
+Alcance: Docker Compose local; no demuestra todavía persistencia en Kubernetes.

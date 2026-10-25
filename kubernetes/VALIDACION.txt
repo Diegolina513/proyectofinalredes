@@ -1,0 +1,24 @@
+Preparación local de MySQL Kubernetes
+Fecha de trabajo: 23 de octubre de 2026, Guatemala.
+
+Comprobaciones realizadas localmente:
+- Carga YAML de los cuatro manifiestos satisfactoria.
+- Validación JSON Schema/OpenAPI oficial de Kubernetes master satisfactoria.
+  Fuente: https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json
+  El esquema identifica su versión como unversioned; no es el API remoto de K3s.
+- SQL en ConfigMap idéntico al archivo database/concesionaria_mvc.sql
+  después de normalizar saltos de línea de lectura de texto.
+- Selectores y referencias Service/StatefulSet/PVC/ConfigMap coherentes.
+- Sintaxis sh de liveness/readiness comprobada con sh -n.
+- MYSQL_PASSWORD y MYSQL_ROOT_PASSWORD solo aparecen como referencias al Secret;
+  no hay Secret con valores generado ni contraseñas en los manifiestos.
+
+No realizado en esta intervención:
+- Conexión SSH, transferencia SCP, kubectl remoto o creación de recursos AWS.
+- Generación o lectura de credenciales.
+- Inicio de MySQL ni validación de las probes en ejecución real.
+
+El README contiene el paso posterior para generar claves nuevas directamente
+hacia un Secret en el servidor. Aplicar los manifiestos y observar el Pod será
+la validación definitiva. PVC local-path: solicitud 5Gi, sin cuota física garantizada,
+usando el disco existente. No se crea un volumen EBS adicional.

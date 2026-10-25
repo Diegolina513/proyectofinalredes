@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: php-sessions
+  namespace: redes2
+  labels:
+    app.kubernetes.io/name: crud-autos
+    app.kubernetes.io/part-of: crud-autos
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 1Gi

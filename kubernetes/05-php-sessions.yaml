@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: php-sessions
+  namespace: redes2
+  labels:
+    app.kubernetes.io/name: crud-autos
+    app.kubernetes.io/part-of: crud-autos
+data:
+  zz-sessions.ini: |
+    session.save_handler = files
+    session.save_path = "/var/lib/php/sessions"
+    session.use_strict_mode = 1
+    session.gc_maxlifetime = 1440
+    session.gc_probability = 1
+    session.gc_divisor = 100

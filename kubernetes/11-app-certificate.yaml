@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app-tls
+  namespace: redes2
+spec:
+  secretName: app-tls
+  dnsNames:
+    - 54-90-155-82.sslip.io
+  issuerRef:
+    name: letsencrypt
+    kind: Issuer
+    group: cert-manager.io
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+    rotationPolicy: Always

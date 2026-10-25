@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-https
+  namespace: redes2
+  labels:
+    app.kubernetes.io/name: crud-autos
+    app.kubernetes.io/part-of: crud-autos
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - 54-90-155-82.sslip.io
+      secretName: app-tls
+  rules:
+    - host: 54-90-155-82.sslip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app
+                port:
+                  number: 80

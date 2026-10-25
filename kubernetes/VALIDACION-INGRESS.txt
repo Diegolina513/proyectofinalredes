@@ -1,0 +1,20 @@
+Verificación de lectura y preparación Ingress/HTTPS
+Fecha de trabajo: 23 de octubre de 2026, Guatemala.
+app Deployment: READY2/2, UP-TO-DATE2, AVAILABLE2.
+Service app: ClusterIP10.43.161.32, puerto80.
+IngressClass traefik: traefik.io/ingress-controller.
+Traefik: rancher/mirrored-library-traefik:3.7.13.
+DNS local: 54-90-155-82.sslip.io resuelve a54.90.155.82.
+HTTP público antes de aplicar09: 404. CRUD aún no validado por Ingress.
+
+09 y12 YAML y esquema OpenAPI Kubernetes válidos.
+10 Issuer y11 Certificate válidos contra CRDs oficiales cert-manager v1.21.3.
+Email no es campo requerido de ACME en ese esquema.
+Referencias a service app80, issuer letsencrypt, secreto app-tls y hostname coherentes.
+
+API real, sin crear recursos:
+ingress.networking.k8s.io/app-http created (server dry run)
+ingress.networking.k8s.io/app-https created (server dry run)
+
+No hubo transferencia SCP ni instalación/despliegue. No se leyeron ni crearon
+Secret/credenciales. Admisión de los CRDs/webhook y emisión de TLS aún pendientes.

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: redes2
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/part-of: crud-autos
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/part-of: crud-autos
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: mysql
+      protocol: TCP

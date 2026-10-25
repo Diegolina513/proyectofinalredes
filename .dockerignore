@@ -1,0 +1,12 @@
+*
+!Dockerfile
+!docker/
+!docker/php.ini
+!app/
+!app/**
+!config/
+!config/**
+!routes/
+!routes/**
+!public/
+!public/**

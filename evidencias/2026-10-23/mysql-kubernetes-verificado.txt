@@ -1,0 +1,26 @@
+MySQL Kubernetes: verificación remota de lectura
+Fecha de trabajo: 23 de octubre de 2026, Guatemala.
+Servidor: ubuntu@ec2-54-90-155-82.compute-1.amazonaws.com
+SSH: StrictHostKeyChecking=yes, BatchMode=yes. No se leyó la clave privada.
+
+sudo -n kubectl -n redes2 get pods,pvc,svc
+Resultado observado:
+pod/mysql-0: READY 1/1, Running, RESTARTS 0, AGE 116s.
+persistentvolumeclaim/mysql-data: Bound, 5Gi, RWO, local-path.
+PV: pvc-3e67c3f4-4845-4334-9274-088b70a676c2.
+service/db: ClusterIP, CLUSTER-IP None, EXTERNAL-IP none, puerto 3306/TCP.
+
+sudo -n kubectl -n redes2 rollout status statefulset/mysql --timeout=30s
+Salida: partitioned roll out complete: 1 new pods have been updated...
+
+Consulta de lectura desde mysql-0 usando MYSQL_USER/MYSQL_PASSWORD existentes
+en el Pod, conexión TCP mediante nombre de servicio db, sin leer ni imprimir Secret.
+Resultado:
+Base: concesionaria_mvc.
+Tablas: autos, categorias, marcas.
+Conteos: marcas 0; categorias 0; autos 0.
+No se insertó, actualizó o eliminó ningún registro ni recurso remoto.
+
+Conclusión: MySQL listo y usuario app puede resolver db, conectarse y consultar
+las tres tablas. La base cloud todavía está vacía. La persistencia Kubernetes
+tras recrear Pod aún no fue probada; no inferirla solo de PVC Bound.

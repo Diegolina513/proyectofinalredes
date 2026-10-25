@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #222;
+    background: #f1f3f2;
+}
+header {
+    background: #0c4938;
+    color: white;
+    padding: 20px 5%;
+}
+header strong { font-size: 24px; }
+nav { margin-top: 18px; }
+nav a {
+    display: inline-block;
+    color: white;
+    padding: 8px 15px;
+    margin-right: 5px;
+    text-decoration: none;
+    border: 1px solid #9bbcaf;
+}
+nav a:hover, nav a[aria-current="page"] {
+    background: white;
+    color: #0c4938;
+}
+main {
+    margin: 25px auto;
+    padding: 20px;
+    max-width: 1100px;
+    background: white;
+    border: 1px solid #ccc;
+    min-height: 350px;
+}
+h1 { color: #0c4938; margin-top: 0; }
+h2 { font-size: 20px; }
+a { color: #0c4938; }
+button, .boton {
+    display: inline-block;
+    background: #0c4938;
+    color: white;
+    border: 1px solid #0c4938;
+    padding: 9px 14px;
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+button:hover, .boton:hover { background: #176149; }
+.peligro { background: #a33232; border-color: #a33232; }
+.peligro:hover { background: #802525; }
+.tabla { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+th { background: #0c4938; color: white; white-space: nowrap; }
+tbody tr:nth-child(even) { background: #f1f5f3; }
+.editor {
+    max-width: 480px;
+    padding: 20px;
+    background: #f7f8f7;
+    border: 1px solid #ccc;
+}
+.editor label { display: block; margin-top: 10px; font-weight: bold; }
+input, select, textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    border: 1px solid #999;
+    background: white;
+    font: inherit;
+}
+textarea { min-height: 80px; }
+.acciones { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.acciones form { margin: 0; }
+.editor .acciones { margin-top: 15px; }
+.exito { background: #e4f2e9; color: #175331; padding: 12px; }
+.error { background: #f9e5e5; color: #922626; padding: 12px; }
+dt { font-weight: bold; color: #0c4938; }
+dd { margin: 5px 0 15px; }
+footer { text-align: center; padding: 18px; color: #555; font-size: 14px; }
+@media (max-width: 600px) {
+    main { margin: 15px 10px; padding: 15px; }
+    header { padding: 18px; }
+    nav a { padding: 8px 10px; }
+}
+
+.filtros { display: flex; gap: 15px; align-items: end; flex-wrap: wrap; padding: 15px; margin-bottom: 20px; background: #f1f5f3; border: 1px solid #ccc; }
+.filtros label { display: block; font-weight: bold; }
+.filtros div { min-width: 160px; max-width: 100%; }
+.filtros select { margin-bottom: 0; }
+nav a { margin-bottom: 5px; }

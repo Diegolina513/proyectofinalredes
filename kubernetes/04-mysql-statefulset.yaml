@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: redes2
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/part-of: crud-autos
+spec:
+  serviceName: db
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mysql
+      app.kubernetes.io/part-of: crud-autos
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mysql
+        app.kubernetes.io/part-of: crud-autos
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: mysql
+          image: mysql:8.4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: mysql
+              containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MYSQL_DATABASE
+              value: concesionaria_mvc
+            - name: MYSQL_USER
+              value: autos
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-credentials
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-credentials
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1536Mi
+          startupProbe:
+            tcpSocket:
+              port: mysql
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 60
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - >-
+                  MYSQL_PWD="$MYSQL_PASSWORD" mysqladmin
+                  --protocol=TCP --host=127.0.0.1 --user="$MYSQL_USER"
+                  --connect-timeout=3 ping --silent >/dev/null 2>&1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - >-
+                  MYSQL_PWD="$MYSQL_PASSWORD" mysql
+                  --protocol=TCP --host=127.0.0.1 --user="$MYSQL_USER"
+                  --connect-timeout=3 --database="$MYSQL_DATABASE"
+                  --execute='SELECT id_marca FROM marcas LIMIT 1; SELECT id_categoria FROM categorias LIMIT 1; SELECT id_auto FROM autos LIMIT 1;'
+                  >/dev/null 2>&1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+            - name: schema
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mysql-data
+        - name: schema
+          configMap:
+            name: mysql-schema
+            defaultMode: 0444

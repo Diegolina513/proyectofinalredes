@@ -1,0 +1,15 @@
+Redes II: verificar persistencia recreando SOLO el contenedor MySQL.
+Contenedor anterior: c92368254e6a56ed2f0798e29cc9f332c3b1f8517c58115c93d8e0cb8b38df1e
+ Container redes2-autos-db-1 Recreate 
+ Container redes2-autos-db-1 Recreated 
+ Container redes2-autos-db-1 Starting 
+ Container redes2-autos-db-1 Started 
+ Container redes2-autos-db-1 Waiting 
+ Container redes2-autos-db-1 Healthy 
+Contenedor nuevo: d2772dd83a25960d21f587417faf2e009d4069ff4ff2ad21a4a58fd1225b5cef
+OK: el auto y su edición siguen presentes después de recrear MySQL: TEST-D5B4F57A
+NAME                 IMAGE               COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+redes2-autos-app-1   crud-autos:v1.0.0   "docker-php-entrypoi…"   app       57 seconds ago   Up 46 seconds (healthy)   127.0.0.1:8080->80/tcp
+redes2-autos-db-1    mysql:8.4           "docker-entrypoint.s…"   db        7 seconds ago    Up 5 seconds (healthy)    3306/tcp, 33060/tcp
+
+Prueba terminada. Podés volver al chat.

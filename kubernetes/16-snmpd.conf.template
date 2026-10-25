@@ -1,0 +1,3 @@
+agentaddress udp:172.31.21.155:161
+view redes2-system included .1.3.6.1.2.1.1
+rocommunity __SNMP_COMMUNITY__ 10.42.0.0/24 -V redes2-system

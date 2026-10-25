@@ -1,0 +1,6 @@
+1. Iniciar la base de datos e importar database/concesionaria_mvc.sql.
+2. Revisar la conexión en config/Conexion.php.
+3. Copiar crud-autos-mvc a C:\xampp\htdocs e iniciar Apache.
+4. Abrir http://localhost/crud-autos-mvc/public/index.php.
+5. Crear primero una marca y una categoría; después registrar los autos.
+Requiere PHP 8 o superior con PDO MySQL.

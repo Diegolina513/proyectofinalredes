@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+ESTADO-PROYECTO.md

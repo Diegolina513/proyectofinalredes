@@ -1,0 +1,23 @@
+Aplicación Kubernetes: preparación local y dry-run de servidor
+Fecha de trabajo: 23 de octubre de 2026, Guatemala.
+
+05-php-sessions.yaml: YAML/OpenAPI válidos.
+06-sessions-pvc.yaml: YAML/OpenAPI válidos.
+07-app-deployment.yaml: YAML/OpenAPI válidos.
+08-app-service.yaml: YAML/OpenAPI válidos.
+Validación local reconoce formato IntOrString de Kubernetes.
+Referencias, selectores, variables DB y rutas de probes comprobados.
+Configuración ini analizada; init validado con sh -n sin ejecutarlo.
+
+SSH con StrictHostKeyChecking=yes y BatchMode=yes; API real de K3s:
+configmap/php-sessions created (server dry run)
+persistentvolumeclaim/php-sessions created (server dry run)
+deployment.apps/app created (server dry run)
+service/app created (server dry run)
+
+Los recursos no se crearon: dry-run=server.
+No se guardaron archivos en el servidor ni se transfirieron por SCP.
+No se leyó o modificó Secret alguno.
+No hubo reconstrucción de imagen, despliegue, mutación de datos ni QA de navegador.
+Permisos, sesiones entre réplicas y continuidad tras borrar un Pod quedan pendientes
+de comprobación en ejecución real después del despliegue manual.
